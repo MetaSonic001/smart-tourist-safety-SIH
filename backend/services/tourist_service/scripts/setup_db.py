@@ -1,6 +1,12 @@
+# scripts/setup_db.py
 """Database setup script for development"""
 import asyncio
 import os
+import sys
+
+# Add parent directory to path so we can import modules
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from sqlalchemy.ext.asyncio import create_async_engine
 from database import Base
 from models import Tourist, Itinerary, Checkin, Hotel, HotelCheckin
@@ -15,7 +21,7 @@ async def create_tables():
         await conn.run_sync(Base.metadata.drop_all)
         # Create all tables
         await conn.run_sync(Base.metadata.create_all)
-        print("Database tables created successfully!")
+        print("✅ Database tables created successfully!")
     
     await engine.dispose()
 
@@ -52,10 +58,39 @@ async def seed_data():
         session.add(hotel)
         
         await session.commit()
-        print("Sample data seeded successfully!")
+        print("✅ Sample data seeded successfully!")
+        print(f"📋 Sample Tourist ID: {tourist.tourist_id}")
+        print(f"🔑 Sample Digital ID: {tourist.digital_id}")
     
     await engine.dispose()
 
+async def test_connection():
+    """Test database connection"""
+    try:
+        database_url = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:password@localhost:5432/touristdb")
+        engine = create_async_engine(database_url)
+        
+        async with engine.begin() as conn:
+            result = await conn.execute("SELECT 1")
+            print("✅ Database connection successful!")
+            
+        await engine.dispose()
+        return True
+    except Exception as e:
+        print(f"❌ Database connection failed: {e}")
+        return False
+
 if __name__ == "__main__":
+    print("🚀 Starting database setup...")
+    
+    # Test connection first
+    if not asyncio.run(test_connection()):
+        print("\n💡 Make sure PostgreSQL is running and accessible!")
+        print("   Run: docker-compose up -d postgres")
+        sys.exit(1)
+    
+    # Create tables and seed data
     asyncio.run(create_tables())
     asyncio.run(seed_data())
+    
+    print("\n🎉 Database setup completed!")
