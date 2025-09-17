@@ -1,0 +1,47 @@
+[
+  {
+    "id": "zone-001",
+    "polygon": [[28.6562, 77.2410], [28.6580, 77.2420], [28.6570, 77.2450], [28.6550, 77.2440]],
+    "riskLevel": "high",
+    "incidentCount": 12,
+    "severity": 0.85,
+    "lastUpdated": "2024-01-15T16:30:00Z",
+    "riskFactors": ["Tourist harassment", "Pickpocketing", "Fraud"]
+  },
+  {
+    "id": "zone-002", 
+    "polygon": [[28.6328, 77.2197], [28.6340, 77.2210], [28.6330, 77.2230], [28.6315, 77.2220]],
+    "riskLevel": "medium",
+    "incidentCount": 7,
+    "severity": 0.65,
+    "lastUpdated": "2024-01-15T16:20:00Z",
+    "riskFactors": ["Theft", "Overcharging"]
+  },
+  {
+    "id": "zone-003",
+    "polygon": [[28.6129, 77.2295], [28.6140, 77.2305], [28.6135, 77.2320], [28.6125, 77.2310]],
+    "riskLevel": "low",
+    "incidentCount": 3,
+    "severity": 0.25,
+    "lastUpdated": "2024-01-15T16:10:00Z",
+    "riskFactors": ["Minor disputes"]
+  },
+  {
+    "id": "zone-004",
+    "polygon": [[28.6506, 77.2334], [28.6520, 77.2350], [28.6510, 77.2370], [28.6495, 77.2355]],
+    "riskLevel": "high",
+    "incidentCount": 15,
+    "severity": 0.90,
+    "lastUpdated": "2024-01-15T16:35:00Z",
+    "riskFactors": ["Food safety", "Unlicensed guides", "Crowding"]
+  },
+  {
+    "id": "zone-005",
+    "polygon": [[28.6428, 77.2085], [28.6440, 77.2095], [28.6435, 77.2110], [28.6420, 77.2100]],
+    "riskLevel": "medium",
+    "incidentCount": 5,
+    "severity": 0.45,
+    "lastUpdated": "2024-01-15T16:15:00Z",
+    "riskFactors": ["Language barriers", "Navigation issues"]
+  }
+]

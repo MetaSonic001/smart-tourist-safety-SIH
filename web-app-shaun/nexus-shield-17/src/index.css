@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Authority Portal Design System - Professional dark blue/teal theme for law enforcement */
+
+@layer base {
+  :root {
+    /* Authority Portal Color Scheme - Professional & Secure */
+    --background: 220 15% 97%;
+    --foreground: 220 25% 15%;
+
+    --card: 220 15% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 220 15% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    /* Primary: Deep Authority Blue */
+    --primary: 220 85% 25%;
+    --primary-foreground: 220 15% 97%;
+    --primary-hover: 220 85% 20%;
+    --primary-glow: 220 85% 35%;
+
+    /* Secondary: Professional Teal */
+    --secondary: 180 45% 88%;
+    --secondary-foreground: 180 85% 15%;
+    --secondary-dark: 180 85% 15%;
+
+    /* Authority Status Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 142 76% 96%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 5%;
+    --danger: 0 84% 60%;
+    --danger-foreground: 0 84% 98%;
+    --info: 200 95% 50%;
+    --info-foreground: 200 95% 5%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 15% 40%;
+
+    --accent: 180 45% 88%;
+    --accent-foreground: 180 85% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 84% 98%;
+
+    --border: 220 15% 85%;
+    --input: 220 15% 92%;
+    --ring: 220 85% 25%;
+
+    /* Authority Portal Specific */
+    --emergency: 0 90% 50%;
+    --emergency-foreground: 0 90% 98%;
+    --priority-high: 15 90% 55%;
+    --priority-medium: 38 92% 50%;
+    --priority-low: 142 76% 36%;
+    
+    /* Status indicators */
+    --status-online: 142 76% 36%;
+    --status-offline: 220 15% 40%;
+    --status-busy: 15 90% 55%;
+    --status-away: 38 92% 50%;
+
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(220 85% 25%), hsl(180 85% 20%));
+    --gradient-emergency: linear-gradient(135deg, hsl(var(--emergency)), hsl(15 90% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 100%), hsl(220 15% 97%));
+    
+    /* Professional shadows */
+    --shadow-card: 0 4px 6px -1px hsl(220 25% 15% / 0.1), 0 2px 4px -1px hsl(220 25% 15% / 0.06);
+    --shadow-elevated: 0 10px 15px -3px hsl(220 25% 15% / 0.1), 0 4px 6px -2px hsl(220 25% 15% / 0.05);
+    --shadow-emergency: 0 4px 20px hsl(var(--emergency) / 0.3);
+    --shadow-glow: 0 0 20px hsl(var(--primary-glow) / 0.2);
+
+    /* Typography scale for professional interface */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode - Professional Authority Theme */
+    --background: 220 25% 8%;
+    --foreground: 220 15% 92%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 220 15% 92%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 220 15% 92%;
+
+    --primary: 220 85% 65%;
+    --primary-foreground: 220 25% 8%;
+    --primary-hover: 220 85% 70%;
+    --primary-glow: 220 85% 75%;
+
+    --secondary: 180 45% 20%;
+    --secondary-foreground: 180 45% 88%;
+    --secondary-dark: 180 85% 85%;
+
+    /* Authority Status Colors - Dark Mode */
+    --success: 142 76% 50%;
+    --success-foreground: 142 76% 5%;
+    --warning: 38 92% 60%;
+    --warning-foreground: 38 92% 5%;
+    --danger: 0 84% 70%;
+    --danger-foreground: 0 84% 5%;
+    --info: 200 95% 60%;
+    --info-foreground: 200 95% 5%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 180 45% 20%;
+    --accent-foreground: 180 45% 88%;
+
+    --destructive: 0 84% 70%;
+    --destructive-foreground: 0 84% 5%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 15%;
+    --ring: 220 85% 65%;
+
+    /* Authority Portal Specific - Dark Mode */
+    --emergency: 0 90% 70%;
+    --emergency-foreground: 0 90% 5%;
+    --priority-high: 15 90% 65%;
+    --priority-medium: 38 92% 60%;
+    --priority-low: 142 76% 50%;
+    
+    /* Status indicators - Dark Mode */
+    --status-online: 142 76% 50%;
+    --status-offline: 220 15% 60%;
+    --status-busy: 15 90% 65%;
+    --status-away: 38 92% 60%;
+
+    /* Professional gradients - Dark Mode */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(220 85% 65%), hsl(180 85% 60%));
+    --gradient-emergency: linear-gradient(135deg, hsl(var(--emergency)), hsl(15 90% 65%));
+    --gradient-card: linear-gradient(145deg, hsl(220 25% 10%), hsl(220 25% 8%));
+    
+    /* Professional shadows - Dark Mode */
+    --shadow-card: 0 4px 6px -1px hsl(220 25% 0% / 0.3), 0 2px 4px -1px hsl(220 25% 0% / 0.2);
+    --shadow-elevated: 0 10px 15px -3px hsl(220 25% 0% / 0.3), 0 4px 6px -2px hsl(220 25% 0% / 0.2);
+    --shadow-emergency: 0 4px 20px hsl(var(--emergency) / 0.4);
+    --shadow-glow: 0 0 20px hsl(var(--primary-glow) / 0.3);
+
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 220 15% 88%;
+    --sidebar-primary: 220 85% 65%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 220 15% 88%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 220 85% 65%;
+  }
+}
+
+/* Authority Portal Utility Classes */
+@layer components {
+  .emergency-pulse {
+    animation: emergency-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .status-indicator {
+    @apply relative inline-block w-3 h-3 rounded-full;
+  }
+
+  .status-online {
+    @apply bg-[hsl(var(--status-online))];
+  }
+
+  .status-offline {
+    @apply bg-[hsl(var(--status-offline))];
+  }
+
+  .status-busy {
+    @apply bg-[hsl(var(--status-busy))];
+  }
+
+  .status-away {
+    @apply bg-[hsl(var(--status-away))];
+  }
+
+  .priority-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .priority-high {
+    @apply bg-[hsl(var(--priority-high))] text-[hsl(var(--danger-foreground))];
+  }
+
+  .priority-medium {
+    @apply bg-[hsl(var(--priority-medium))] text-[hsl(var(--warning-foreground))];
+  }
+
+  .priority-low {
+    @apply bg-[hsl(var(--priority-low))] text-[hsl(var(--success-foreground))];
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-emergency {
+    background: var(--gradient-emergency);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-emergency {
+    box-shadow: var(--shadow-emergency);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  .map-container {
+    @apply relative w-full h-full overflow-hidden rounded-lg;
+  }
+}
+
+/* Authority Portal Animations */
+@keyframes emergency-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-out;
+}
