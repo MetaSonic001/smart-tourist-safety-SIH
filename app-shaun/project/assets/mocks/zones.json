@@ -1,0 +1,41 @@
+[
+  {
+    "id": "zone-001",
+    "name": "Police Bazaar (Safe Zone)",
+    "coordinates": [
+      { "latitude": 25.5701, "longitude": 91.8932 },
+      { "latitude": 25.5711, "longitude": 91.8942 },
+      { "latitude": 25.5721, "longitude": 91.8922 },
+      { "latitude": 25.5701, "longitude": 91.8912 }
+    ],
+    "riskLevel": "low",
+    "description": "Main commercial area with good security presence",
+    "alerts": []
+  },
+  {
+    "id": "zone-002",
+    "name": "Laitumkhrah (Moderate Risk)",
+    "coordinates": [
+      { "latitude": 25.5850, "longitude": 91.8850 },
+      { "latitude": 25.5870, "longitude": 91.8870 },
+      { "latitude": 25.5890, "longitude": 91.8850 },
+      { "latitude": 25.5870, "longitude": 91.8830 }
+    ],
+    "riskLevel": "medium",
+    "description": "Residential area with moderate foot traffic",
+    "alerts": ["Limited street lighting after 9 PM"]
+  },
+  {
+    "id": "zone-003",
+    "name": "Nongthymmai (High Risk)",
+    "coordinates": [
+      { "latitude": 25.5950, "longitude": 91.9050 },
+      { "latitude": 25.5970, "longitude": 91.9070 },
+      { "latitude": 25.5990, "longitude": 91.9050 },
+      { "latitude": 25.5970, "longitude": 91.9030 }
+    ],
+    "riskLevel": "high",
+    "description": "Remote area with recent incident reports",
+    "alerts": ["Avoid after dark", "Travel in groups", "Poor mobile network coverage"]
+  }
+]

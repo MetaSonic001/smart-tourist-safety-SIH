@@ -1,0 +1,12 @@
+{
+  "digitalId": "DID-1111-2222",
+  "touristId": "demo-user-001",
+  "name": "Demo Tourist",
+  "email": "tourist_demo@demo.local",
+  "phone": "+91 9876543210",
+  "issuedAt": "2024-01-15T10:30:00Z",
+  "expiresAt": "2024-01-22T23:59:59Z",
+  "status": "active",
+  "consentHash": "demo-consent-hash-123",
+  "verificationLevel": "verified"
+}

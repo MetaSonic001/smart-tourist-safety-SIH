@@ -1,0 +1,35 @@
+[
+  {
+    "id": "inc-001",
+    "type": "theft",
+    "location": { "lat": 25.5950, "lng": 91.9050 },
+    "timestamp": "2024-01-13T18:30:00Z",
+    "description": "Reported theft incident - mobile phone stolen",
+    "severity": "medium",
+    "status": "resolved",
+    "affectedTourists": 1,
+    "reportedBy": "DID-9999-8888"
+  },
+  {
+    "id": "inc-002",
+    "type": "accident",
+    "location": { "lat": 25.5850, "lng": 91.8850 },
+    "timestamp": "2024-01-14T14:15:00Z",
+    "description": "Minor traffic accident - no injuries",
+    "severity": "low",
+    "status": "closed",
+    "affectedTourists": 0,
+    "reportedBy": "local_authority"
+  },
+  {
+    "id": "inc-003",
+    "type": "weather",
+    "location": { "lat": 25.5788, "lng": 91.8933 },
+    "timestamp": "2024-01-14T20:00:00Z",
+    "description": "Heavy rainfall advisory - flooding risk in low-lying areas",
+    "severity": "high",
+    "status": "active",
+    "affectedTourists": 12,
+    "reportedBy": "weather_service"
+  }
+]
