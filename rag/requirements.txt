@@ -1,0 +1,38 @@
+# Core Flask application
+flask
+werkzeug
+
+# Twilio integration
+twilio
+
+# Environment variables
+python-dotenv
+
+# Vector database and embeddings
+chromadb
+sentence-transformers
+
+# HTTP requests for API calls
+requests
+
+# Data handling
+pandas
+numpy
+
+# JSON and data parsing
+pydantic
+
+# Optional: Enhanced logging
+colorlog
+
+# Optional: Database drivers (uncomment if using external database)
+# psycopg2-binary  # PostgreSQL
+# pymongo          # MongoDB
+
+# Optional: Advanced NLP (uncomment if using local models)
+# torch
+# transformers
+
+# Development and testing
+pytest
+pytest-flask
