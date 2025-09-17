@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  dashboard-aggregator:
+    build: .
+    ports:
+      - "8006:8006"
+    environment:
+      - SERVICE_PORT=8006
+      - DATABASE_URL=postgresql://dashboard_user:dashboard_pass@postgres:5432/dashboard_db
+      - REDIS_URL=redis://redis:6379
+      - BLOCKCHAIN_URL=http://blockchain:8004
+      - AUTH_URL=http://keycloak:8080
+      - ML_SERVICE_URL=http://ml-service:8002
+      - TOURIST_PROFILE_URL=http://tourist-profile:8001
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=dashboard_db
+      - POSTGRES_USER=dashboard_user
+      - POSTGRES_PASSWORD=dashboard_pass
+    volumes:
+      - dashboard_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  dashboard_db_data:

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  blockchain-bridge:
+    build: .
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/blockchain_bridge
+      - REDIS_URL=redis://redis:6379
+      - FABRIC_DEV_MODE=true
+      - CHAINCODE_NAME=integrity_anchor
+      - CHANNEL_NAME=mainchannel
+      - WALLET_PATH=/app/fabric_wallet
+      - ENCRYPTION_KEY=your_encryption_key_here
+    volumes:
+      - ./fabric_wallet:/app/fabric_wallet
+      - ./logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=blockchain_bridge
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  # Optional: Redis GUI for development
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+  redis_data:

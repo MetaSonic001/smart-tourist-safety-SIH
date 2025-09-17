@@ -1,0 +1,39 @@
+import os
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    # Database
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql+asyncpg://user:pass@localhost:5432/tourist_auth")
+    
+    # MinIO/S3
+    MINIO_ENDPOINT: str = os.getenv("MINIO_ENDPOINT", "localhost:9000")
+    MINIO_ACCESS_KEY: str = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
+    MINIO_SECRET_KEY: str = os.getenv("MINIO_SECRET_KEY", "minioadmin")
+    MINIO_BUCKET: str = os.getenv("MINIO_BUCKET", "tourist-docs")
+    MINIO_SECURE: bool = os.getenv("MINIO_SECURE", "false").lower() == "true"
+    
+    # External Services
+    BLOCKCHAIN_URL: str = os.getenv("BLOCKCHAIN_URL", "http://localhost:8002")
+    DASHBOARD_URL: str = os.getenv("DASHBOARD_URL", "http://localhost:3000")
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379")
+    
+    # Authentication
+    USE_KEYCLOAK: bool = os.getenv("USE_KEYCLOAK", "false").lower() == "true"
+    KEYCLOAK_SERVER_URL: str = os.getenv("KEYCLOAK_SERVER_URL", "http://localhost:8080")
+    KEYCLOAK_REALM: str = os.getenv("KEYCLOAK_REALM", "tourist-safety")
+    KEYCLOAK_CLIENT_ID: str = os.getenv("KEYCLOAK_CLIENT_ID", "tourist-auth")
+    KEYCLOAK_CLIENT_SECRET: str = os.getenv("KEYCLOAK_CLIENT_SECRET", "")
+    
+    # JWT (fallback)
+    JWT_SECRET: str = os.getenv("JWT_SECRET", "your-super-secret-jwt-key-change-in-production")
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRY_HOURS: int = 24
+    
+    # Encryption
+    ENCRYPTION_KEY: str = os.getenv("ENCRYPTION_KEY", "your-32-byte-encryption-key-here!!")
+    
+    # Development
+    MOCK_MODE: bool = os.getenv("MOCK_MODE", "false").lower() == "true"
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
+
+settings = Settings()
