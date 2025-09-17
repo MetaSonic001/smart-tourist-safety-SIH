@@ -1,0 +1,167 @@
+# SIH Blockchain Project .gitignore
+
+# =============================================================================
+# Hyperledger Fabric - DON'T COMMIT THESE (Large downloads)
+# =============================================================================
+fabric-samples/
+bin/
+config/
+
+# =============================================================================
+# Generated Chaincode Packages
+# =============================================================================
+*.tar.gz
+*.zip
+
+# =============================================================================
+# Temporary Files
+# =============================================================================
+temp_output.txt
+log.txt
+*.log
+*.tmp
+output.json
+
+# =============================================================================
+# Go Build Artifacts
+# =============================================================================
+# Compiled binaries
+sih-chaincode
+sih-chaincode.exe
+
+# Go build cache
+.cache/
+
+# Go vendor directory (if using vendor/)
+vendor/
+
+# Test coverage files
+coverage.out
+*.cover
+
+# Go workspace file
+go.work
+
+# =============================================================================
+# Docker & Blockchain Runtime Data
+# =============================================================================
+# Docker volumes (blockchain data)
+/var/hyperledger/
+.fabricca-server/
+
+# Wallet files (contains private keys - NEVER COMMIT)
+wallet/
+keystore/
+*.pem
+*.key
+*-cert.pem
+*-key.pem
+
+# =============================================================================
+# IDE & Editor Files
+# =============================================================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# GoLand/IntelliJ
+.idea/
+*.iml
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# =============================================================================
+# Operating System Files
+# =============================================================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Linux
+*~
+.nfs*
+
+# =============================================================================
+# Node.js (if you add Node.js client later)
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# =============================================================================
+# Python (if you add Python client later)  
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+
+# =============================================================================
+# Environment & Secrets - NEVER COMMIT THESE
+# =============================================================================
+.env
+.env.local
+.env.*.local
+secrets.json
+config.local.json
+
+# Private keys and certificates
+*.priv
+*.pub
+msp/
+crypto-config/
+
+# =============================================================================
+# Backup Files
+# =============================================================================
+*.backup
+*.bak
+*.orig
+
+# =============================================================================
+# Custom Project Excludes
+# =============================================================================
+# Local configuration overrides
+config.local.*
+connection-profile.local.json
+
+# Test data exports
+*_backup.json
+test-data/
+exports/
+
+# Performance test results
+benchmark-results/
+perf-test-*.log
