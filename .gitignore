@@ -1,0 +1,5 @@
+/project/node_modules
+/project/package-lock.json
+
+./project/node_modules
+./project/package-lock.json
