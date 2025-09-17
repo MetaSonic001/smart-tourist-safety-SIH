@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  alerts-incident-api:
+    build: .
+    ports:
+      - "8005:8005"
+    environment:
+      - SERVICE_PORT=8005
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/alertsdb
+      - REDIS_URL=redis://redis:6379/0
+      - MINIO_ENDPOINT=minio:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+      - MINIO_SECURE=false
+      - BLOCKCHAIN_URL=http://blockchain-service:8003
+      - ML_URL=http://ml-service:8002
+      - OPERATOR_URL=http://operator-service:8004
+      - DASHBOARD_URL=http://dashboard:3000
+      - JWT_SECRET=your-super-secret-jwt-key-here
+      - USE_FAKE_BLOCKCHAIN=true
+    depends_on:
+      - db
+      - redis
+      - minio
+    volumes:
+      - .:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8005 --reload
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=alertsdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
