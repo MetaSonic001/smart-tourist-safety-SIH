@@ -1,5 +1,5 @@
-/project/node_modules
-/project/package-lock.json
+/mobile-app/node_modules
+/mobile-app/package-lock.json
 
-./project/node_modules
-./project/package-lock.json
+./mobile-app/node_modules
+./mobile-app/package-lock.json
