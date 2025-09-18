@@ -1,5 +1,3 @@
-# setup-complete.bat - Master Setup Script
-# ============================================================================
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -33,20 +31,64 @@ docker-compose -f docker-compose-keycloak.yml up -d
 echo [STEP 3] Waiting for services to be ready...
 echo This may take 2-3 minutes on first startup...
 
-REM Wait for Keycloak health check
+REM Wait for Keycloak with timeout and better health check
+set /a counter=0
+set /a max_attempts=60
+
 :wait_loop
-timeout /t 10 >nul
-docker exec keycloak-sih curl -f http://localhost:8080/health/ready >nul 2>&1
-if errorlevel 1 (
-    echo Still waiting for Keycloak...
-    goto wait_loop
+set /a counter+=1
+echo Checking Keycloak readiness... (attempt %counter%/%max_attempts%)
+
+REM Try multiple health check methods
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:8080/realms/master' -TimeoutSec 5; if ($response.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
+if not errorlevel 1 (
+    echo [SUCCESS] Keycloak is ready!
+    goto configure
 )
 
-echo [SUCCESS] Keycloak is ready!
+REM Alternative check - try admin console
+powershell -Command "try { $response = Invoke-WebRequest -Uri 'http://localhost:8080/admin/' -TimeoutSec 5; if ($response.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
+if not errorlevel 1 (
+    echo [SUCCESS] Keycloak is ready!
+    goto configure
+)
 
+REM Check if we've exceeded max attempts
+if %counter% geq %max_attempts% (
+    echo [WARNING] Keycloak health check timed out after %max_attempts% attempts.
+    echo However, attempting to run configuration anyway...
+    echo You can check Keycloak manually at: http://localhost:8080/admin/
+    goto configure
+)
+
+timeout /t 10 >nul
+goto wait_loop
+
+:configure
 echo [STEP 4] Running configuration script...
-python setup-keycloak-detailed.py
 
+REM Check if Python is available
+python --version >nul 2>&1
+if not errorlevel 1 (
+    python setup-keycloak-detailed.py
+    goto check_result
+)
+
+python3 --version >nul 2>&1
+if not errorlevel 1 (
+    python3 setup-keycloak-detailed.py
+    goto check_result
+)
+
+echo [ERROR] Python not found. Please install Python 3.7+ and run:
+echo   python setup-keycloak-detailed.py
+echo.
+echo Or configure Keycloak manually at: http://localhost:8080/admin/
+echo Admin credentials: admin / admin123
+pause
+exit /b 1
+
+:check_result
 if errorlevel 1 (
     echo [ERROR] Configuration script failed. 
     echo Please check Python installation and try again.
@@ -81,5 +123,8 @@ echo   1. Copy keycloak-client-secrets.env to your microservices
 echo   2. Update your .env files with the client secrets
 echo   3. Set USE_KEYCLOAK=true in your services
 echo   4. Test authentication with your applications
+echo.
+echo 📋 Daily Usage:
+echo   daily-usage.bat - Start/stop/manage Keycloak
 echo.
 pause

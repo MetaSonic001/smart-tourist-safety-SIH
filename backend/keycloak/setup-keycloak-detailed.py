@@ -41,6 +41,36 @@ class KeycloakConfigurator:
             print(f"❌ Failed to authenticate: {e}")
             return False
     
+    def create_sih_realm(self):
+        """Create the SIH realm"""
+        print("\n🏠 Creating SIH realm...")
+        
+        realm_config = {
+            "realm": self.realm,
+            "enabled": True,
+            "displayName": "Smart Tourist Safety",
+            "sslRequired": "none",
+            "registrationAllowed": False,
+            "passwordPolicy": "length(10) and digits(1) and lowerCase(1) and upperCase(1) and specialChars(1)",
+            "bruteForceProtected": True,
+            "maxFailureWaitSeconds": 900,
+            "adminEventsEnabled": True,
+            "eventsEnabled": True
+        }
+        
+        url = f"{self.base_url}/admin/realms"
+        
+        try:
+            response = requests.post(url, headers=self.get_headers(), json=realm_config)
+            if response.status_code == 201:
+                print(f"  ✅ Created SIH realm successfully")
+            elif response.status_code == 409:
+                print(f"  ℹ️  SIH realm already exists")
+            else:
+                print(f"  ⚠️  Failed to create SIH realm: {response.status_code}")
+        except Exception as e:
+            print(f"  ❌ Error creating SIH realm: {e}")    
+    
     def get_headers(self) -> Dict[str, str]:
         """Get authorization headers"""
         return {
@@ -134,7 +164,7 @@ class KeycloakConfigurator:
         }
         
         # Create role lookup
-        role_lookup = {role["name"]: role for role in roles}
+        role_lookup = {role["name"]: role for role in roles if isinstance(role, dict) and "name" in role}
         
         for group in groups:
             group_name = group["name"]
@@ -685,6 +715,9 @@ class KeycloakConfigurator:
         if not self.authenticate():
             return False
         
+        # Add this line:
+        self.create_sih_realm()
+        time.sleep(2)  # Wait for realm to be ready
         self.create_realm_roles()
         self.create_groups()
         self.assign_roles_to_groups()
